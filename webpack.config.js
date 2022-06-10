@@ -9,6 +9,7 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: 'app.min.js',
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {

@@ -1,6 +1,20 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchBar from './SearchBar';
+import '../styles/videoApp.css';
 
-const VideoApp = () => <h1> TEST </h1>;
+const VideoApp = () => {
+    console.log('videoApp component');
+
+    return (
+        <div className="wrap">
+            <header className="header">
+                <h1 className="header__heading">VideoApp</h1>
+            </header>
+            <main className="main">
+                <SearchBar />
+            </main>
+        </div>
+    );
+};
 
 export default VideoApp;
