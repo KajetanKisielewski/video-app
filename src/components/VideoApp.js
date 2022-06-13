@@ -1,19 +1,19 @@
 import React from 'react';
-import SearchBar from './SearchBar';
-import '../styles/videoApp.css';
+import { Container, Row, Col } from 'reactstrap';
+
+import NavBar from './NavBar';
 
 const VideoApp = () => {
     console.log('videoApp component');
 
     return (
-        <div className="wrap">
-            <header className="header">
-                <h1 className="header__heading">VideoApp</h1>
-            </header>
-            <main className="main">
-                <SearchBar />
-            </main>
-        </div>
+        <Container fluid>
+            <Row className="header">
+                <Col>
+                    <NavBar />
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
