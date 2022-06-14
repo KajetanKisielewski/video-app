@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 
-import './NavBar.css';
+import '../styles/navBar.css';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -9,22 +9,20 @@ const NavBar = () => {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <div>
-            <Navbar color="dark" dark expand="md">
-                <NavbarBrand href="/">Video App</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/">Home</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/">Videos</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        </div>
+        <Navbar color="dark" dark expand="md">
+            <NavbarBrand href="/">Video App</NavbarBrand>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        <NavLink href="/">Home</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="/">Videos</NavLink>
+                    </NavItem>
+                </Nav>
+            </Collapse>
+        </Navbar>
     );
 };
 
