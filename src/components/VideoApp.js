@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
@@ -8,19 +9,19 @@ import SearchResult from './SearchResult';
 import '../styles/videoApp.css';
 
 const VideoApp = () => {
-    console.log('videoApp component');
+    const [url, setUrl] = React.useState('');
 
     return (
         <Container fluid>
             <Row className="header">
                 <Col className="header__col">
                     <NavBar />
-                    <SearchBar />
+                    <SearchBar setUrl={setUrl} />
                 </Col>
             </Row>
             <Row className="main">
                 <Col>
-                    <SearchResult />
+                    <SearchResult url={url} />
                 </Col>
             </Row>
         </Container>

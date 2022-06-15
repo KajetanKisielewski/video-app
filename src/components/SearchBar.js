@@ -3,7 +3,7 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import '../styles/searchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({ setUrl }) => {
     const [state, setState] = React.useState([]);
 
     const handleChange = (e) => {
@@ -11,8 +11,21 @@ const SearchBar = () => {
         setState(value);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const baseURL = `https://www.googleapis.com/youtube/v3/search`;
+        const query = state;
+
+        const url = `${baseURL}?q=v=${query}&key=${KEY}&part=snippet&type=video&maxResults=5`;
+
+        console.log('seachurl', url);
+
+        setUrl(url);
+    };
+
     return (
-        <Form className="form">
+        <Form className="form" onSubmit={handleSubmit}>
             <FormGroup className="form__field">
                 <Input
                     id="searchBar"
