@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
+import { generateURL, clearInputValue } from '../helpers/auxiliaryFunctions';
+
 import '../styles/searchBar.css';
 
 const SearchBar = ({ setUrl }) => {
@@ -14,14 +16,10 @@ const SearchBar = ({ setUrl }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const baseURL = `https://www.googleapis.com/youtube/v3/search`;
-        const query = state;
-
-        const url = `${baseURL}?q=v=${query}&key=${KEY}&part=snippet&type=video&maxResults=5`;
-
-        console.log('seachurl', url);
-
+        const url = generateURL(state);
         setUrl(url);
+
+        clearInputValue('.form__field--input');
     };
 
     return (

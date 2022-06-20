@@ -1,11 +1,11 @@
 import React from 'react';
 
-const useFetch = (url) => {
+const useFetch = () => {
     const [data, setData] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 
-    React.useEffect(() => {
+    const fetchData = (url) => {
         setLoading(true);
 
         fetch(url)
@@ -16,9 +16,9 @@ const useFetch = (url) => {
             .then((resp) => setData(resp))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
-    }, [url]);
+    };
 
-    return [data, loading, error];
+    return [data, loading, error, fetchData];
 };
 
 export default useFetch;
