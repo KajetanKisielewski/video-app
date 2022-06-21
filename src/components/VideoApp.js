@@ -4,21 +4,33 @@ import { Container, Row, Col } from 'reactstrap';
 
 import NavBar from './NavBar';
 import SearchBar from './SearchBar';
-import SearchResult from './SearchResult';
+import VideoList from './VideoList';
 
-import useLocalStorage from '../hooks/useLocalStorage';
+import { useFetch, useLocalStorage, useModal } from '../hooks';
 
-import videoReducer from '../reducer/videoReducer';
+import { VideoContext, EditContext } from '../context';
+
+import { videoReducer } from '../reducer';
+import { VIDEO_ACTIONS } from '../helpers/actions';
 
 import '../styles/videoApp.css';
-import useFetch from '../hooks/useFetch';
 
 const VideoApp = () => {
     const [url, setUrl] = React.useState(null);
+    const [showModal, closeModal, RenderModalContent, setContent] = useModal();
     const [getLocalStorage, setLocalStorage] = useLocalStorage();
+    const { data, loading, error } = useFetch(url);
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
 
-    console.log('v', videos);
+    React.useEffect(() => {
+        if (data.length !== 0) {
+            dispatch({
+                type: VIDEO_ACTIONS.ADD,
+                payload: data,
+            });
+        }
+    }, [data]);
+
     React.useEffect(() => {
         setLocalStorage(videos);
     }, [videos]);
@@ -31,11 +43,19 @@ const VideoApp = () => {
                     <SearchBar setUrl={setUrl} />
                 </Col>
             </Row>
-            <Row className="main">
-                <Col>
-                    <SearchResult url={url} dispatch={dispatch} videos={videos} />
-                </Col>
-            </Row>
+            <VideoContext.Provider value={videos}>
+                <EditContext.Provider value={dispatch}>
+                    <Row className="main">
+                        <Col className="main__col">
+                            <h2 className="main__heading">Videos List</h2>
+                            {loading && <h3>Loading...</h3>}
+                            {error && <h3>Error</h3>}
+                            <VideoList />
+                        </Col>
+                    </Row>
+                    <RenderModalContent />
+                </EditContext.Provider>
+            </VideoContext.Provider>
         </Container>
     );
 };

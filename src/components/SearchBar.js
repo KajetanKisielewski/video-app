@@ -1,11 +1,14 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-
 import { generateURL, clearInputValue } from '../helpers/auxiliaryFunctions';
-
 import '../styles/searchBar.css';
 
-const SearchBar = ({ setUrl }) => {
+import useURLGenerate from '../hooks/useURLGenerete';
+
+const SearchBar = () => {
+    const [url, setUrl] = useURLGenerate(null);
+    console.log('url3', url);
+
     const [state, setState] = React.useState([]);
 
     const handleChange = (e) => {
@@ -16,8 +19,8 @@ const SearchBar = ({ setUrl }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const url = generateURL(state);
-        setUrl(url);
+        const urll = generateURL(state);
+        setUrl(urll);
 
         clearInputValue('.form__field--input');
     };

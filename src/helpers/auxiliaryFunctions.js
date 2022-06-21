@@ -17,7 +17,6 @@ export const generateURL = (query) => {
 };
 
 export const structureVideoData = (videoData) => {
-    console.log('structure', videoData);
     const {
         id,
         snippet: { title, thumbnails },
@@ -29,14 +28,23 @@ export const structureVideoData = (videoData) => {
         videoID: id,
         title,
         videoThumb: {
-            videoThumbDefault: thumbnails.default,
-            videoThumbMedium: thumbnails.medium,
-            videoThumbHight: thumbnails.high,
+            default: thumbnails.default,
+            medium: thumbnails.medium,
+            hight: thumbnails.high,
         },
         viewCount,
         likeCount,
+        dateAdded: new Date().toISOString().slice(0, 10),
+        isFavorite: false,
     };
 };
+
+export const createInitState = () => ({
+    data: [],
+    loading: false,
+    error: null,
+});
+
 
 export const clearInputValue = (className) => {
     const input = document.querySelector(className);

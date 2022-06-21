@@ -1,24 +1,32 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import useURLGenerate from './useURLGenerete';
+
+import { FETCH_ACTIONS } from '../helpers/actions';
+import { fetchReducer } from '../reducer';
+
+import { createInitState } from '../helpers/auxiliaryFunctions';
 
 const useFetch = () => {
-    const [data, setData] = React.useState(null);
-    const [loading, setLoading] = React.useState(false);
-    const [error, setError] = React.useState(null);
+    const [state, dispatch] = React.useReducer(fetchReducer, createInitState());
 
-    const fetchData = (url) => {
-        setLoading(true);
-
-        fetch(url)
-            .then((resp) => {
-                if (resp.ok) return resp.json();
-                return Promise.reject(resp);
-            })
-            .then((resp) => setData(resp))
-            .catch((err) => setError(err))
-            .finally(() => setLoading(false));
-    };
-
-    return [data, loading, error, fetchData];
+    React.useEffect(() => {
+        if (url !== null) {
+            dispatch({ type: FETCH_ACTIONS.API_REQUEST });
+            fetch(url)
+                .then((resp) => {
+                    if (resp.ok) return resp.json();
+                    return Promise.reject(resp);
+                })
+                .then((resp) => {
+                    dispatch({ type: FETCH_ACTIONS.FETCH_DATA, payload: resp });
+                })
+                .catch((err) => {
+                    dispatch({ type: FETCH_ACTIONS.ERROR, payload: err });
+                });
+        }
+    }, [url]);
+    return state;
 };
 
 export default useFetch;
