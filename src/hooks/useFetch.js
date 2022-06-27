@@ -1,21 +1,21 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import useURLGenerate from './useURLGenerete';
 
 import { FETCH_ACTIONS } from '../helpers/actions';
 import { fetchReducer } from '../reducer';
-
 import { createInitState } from '../helpers/auxiliaryFunctions';
 
-const useFetch = () => {
+const useFetch = (generateFetchParameters) => {
     const [state, dispatch] = React.useReducer(fetchReducer, createInitState());
 
+    const [path, options = { method: 'GET' }] = generateFetchParameters() || [];
+
     React.useEffect(() => {
-        if (url !== null) {
+        if (path !== undefined) {
             dispatch({ type: FETCH_ACTIONS.API_REQUEST });
-            fetch(url)
+            fetch(path, options)
                 .then((resp) => {
                     if (resp.ok) return resp.json();
+
                     return Promise.reject(resp);
                 })
                 .then((resp) => {
@@ -25,7 +25,8 @@ const useFetch = () => {
                     dispatch({ type: FETCH_ACTIONS.ERROR, payload: err });
                 });
         }
-    }, [url]);
+    }, [path]);
+
     return state;
 };
 

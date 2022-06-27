@@ -1,15 +1,16 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { generateURL, clearInputValue } from '../helpers/auxiliaryFunctions';
-import '../styles/searchBar.css';
 
-import useURLGenerate from '../hooks/useURLGenerete';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+
+import VideoContext from '../../context/VideoContext';
+import { clearInputValue } from '../../helpers/auxiliaryFunctions';
+
+import './searchBar.css';
 
 const SearchBar = () => {
-    const [url, setUrl] = useURLGenerate(null);
-    console.log('url3', url);
-
     const [state, setState] = React.useState([]);
+
+    const videoContext = React.useContext(VideoContext);
 
     const handleChange = (e) => {
         const { value } = e.target;
@@ -19,8 +20,7 @@ const SearchBar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const urll = generateURL(state);
-        setUrl(urll);
+        videoContext.setUrl(state);
 
         clearInputValue('.form__field--input');
     };

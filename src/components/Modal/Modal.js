@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
+import './modal.css';
+
 const Modal = (props) => {
     const { content, closeModal } = props;
 

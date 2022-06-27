@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoApp from './VideoApp';
+import VideoApp from './VideoApp/VideoApp';
 
 const App = () => <VideoApp />;
 

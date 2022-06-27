@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../components/Modal';
+import VideoModal from '../components/Modal/Modal';
 
 const useModal = () => {
     const [visible, setVisible] = React.useState(false);
@@ -10,7 +10,7 @@ const useModal = () => {
     const closeModal = () => setVisible(false);
 
     const renderModalContent = () =>
-        visible ? <Modal content={content} closeModal={closeModal} /> : null;
+        visible ? <VideoModal content={content} closeModal={closeModal} /> : null;
 
     return [showModal, closeModal, renderModalContent, setContent];
 };
