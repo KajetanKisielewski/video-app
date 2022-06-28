@@ -1,28 +1,18 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-unused-vars */
 import { v4 as uuid } from 'uuid';
 import { YOUTUBE_API_KEY, VIMEO_API_KEY } from '../../apiKeys';
 
-const structureYoutubeData = (videoData) => {
+const destructurizeYoutubeObject = (videoData) => {
     const {
         snippet: { title, thumbnails },
         statistics: { viewCount, likeCount },
         player: { embedHtml },
-    } = videoData.items[0];
+    } = videoData;
 
-    return {
-        id: uuid(),
-        title,
-        videoThumb: thumbnails.medium.url,
-        viewCount,
-        likeCount,
-        dateAdded: new Date(),
-        isFavorite: false,
-        player: embedHtml,
-        view: 'tiles',
-    };
+    return { title, videoThumb: thumbnails.medium.url, viewCount, likeCount, player: embedHtml };
 };
-const structureVimeoData = (videoData) => {
+
+const destructurizeVimeoObject = (videoData) => {
     const {
         name,
         embed: { html },
@@ -33,32 +23,31 @@ const structureVimeoData = (videoData) => {
         },
         pictures: { base_link },
         stats: { plays },
-    } = videoData[0];
+    } = videoData;
+
+    return { title: name, videoThumb: base_link, viewCount: plays, likeCount: total, player: html };
+};
+
+export const structureVideoData = (videoData) => {
+    const youTubeData = videoData?.items?.[0];
+    const vimeoData = videoData;
+
+    const structureData = youTubeData
+        ? destructurizeYoutubeObject(youTubeData)
+        : destructurizeVimeoObject(vimeoData);
 
     return {
         id: uuid(),
-        title: name,
-        videoThumb: base_link,
-        viewCount: plays,
-        likeCount: total,
+        title: structureData.title,
+        videoThumb: structureData.videoThumb,
+        viewCount: structureData.viewCount,
+        likeCount: structureData.likeCount,
+        player: structureData.player,
         dateAdded: new Date(),
         isFavorite: false,
-        player: html,
         view: 'tiles',
     };
 };
-
-export const structureVideoData = (videoData) =>
-    videoData?.items ? structureYoutubeData(videoData) : structureVimeoData([videoData]);
-
-// id: uuid(),
-// title: videoData?.items[0].snippet.title || videoData.name,
-// videoThumb: videoData.items[0].snippet.thumbnails.default || videoData.pictures.base_link,
-// viewCount: videoData.items[0].statistics.viewCount || videoData.stats.plays,
-// likeCount: videoData.items[0].statistics.likeCount || videoData.metadata.connections.likes,
-// dateAdded: new Date().toISOString().slice(0, 10),
-// isFavorite: false,
-// player: videoData.items[0].player.embedHtml || videoData.embed,
 
 export const createInitState = () => ({
     data: [],
