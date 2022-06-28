@@ -23,6 +23,7 @@ const VideoApp = () => {
     const { data, loading, error } = useFetch(generateFetchParameters);
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
 
+    // console.log('vg', generateFetchParameters);
     console.log(videos);
 
     React.useEffect(() => {

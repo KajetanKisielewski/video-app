@@ -20,7 +20,7 @@ const SearchBar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        videoContext.setUrl(state);
+        videoContext.setUrl([state]);
 
         clearInputValue('.form__field--input');
     };

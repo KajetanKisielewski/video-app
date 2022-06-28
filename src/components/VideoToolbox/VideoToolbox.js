@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { Button } from 'reactstrap';
-
 import VideoContext from '../../context/VideoContext';
 import { VIDEO_ACTIONS } from '../../helpers/actions';
 import { createDemosList } from '../../helpers/auxiliaryFunctions';
@@ -35,8 +34,7 @@ const VideoToolbox = () => {
     const setDemoVideoList = () => {
         const demos = createDemosList();
 
-        demos.forEach((demo) => videoContext.setUrl(demo));
-        // videoContext.dispatch({ type: VIDEO_ACTIONS.SET_DEMO_VIDEO_LIST });
+        videoContext.setUrl(demos);
     };
 
     return (
