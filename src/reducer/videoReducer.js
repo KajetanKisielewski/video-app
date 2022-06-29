@@ -2,6 +2,7 @@ import { VIDEO_ACTIONS } from '../helpers/actions';
 import { structureVideoData } from '../helpers/auxiliaryFunctions';
 
 const videoReducer = (state, { type, payload }) => {
+
     switch (type) {
         case VIDEO_ACTIONS.ADD:
             return [...state, structureVideoData(payload)];
@@ -14,7 +15,6 @@ const videoReducer = (state, { type, payload }) => {
 
             return state.map((item) => (item.id === id ? { ...item, ...rest } : item));
         }
-
         case VIDEO_ACTIONS.CLEAR:
             return [];
 
@@ -30,9 +30,6 @@ const videoReducer = (state, { type, payload }) => {
         case VIDEO_ACTIONS.SET_LIST_VIEW:
             return state.map((item) => (item.view === 'tiles' ? { ...item, view: 'list' } : item));
 
-        case VIDEO_ACTIONS.SET_DEMO_VIDEO_LIST:
-            console.log('p', payload);
-            return state;
         default:
             return state;
     }

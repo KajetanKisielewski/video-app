@@ -1,18 +1,16 @@
-.header {
-    border-bottom: 1px solid black;
-}
-
 .main__col {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
+    justify-content: center;
 
     text-align: center;
     margin: 0 auto;
 }
 
-.main__heading {
-    padding: 2rem;;
-
+.main__heading,
+.main__heading--loading,
+.main__heading--loading {
     width: 100%;
+    margin-block-end: 2rem;
+    padding: 2rem;
 }

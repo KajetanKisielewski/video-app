@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import VideoContext from '../../context/VideoContext';
@@ -26,7 +25,7 @@ const SearchBar = () => {
     };
 
     return (
-        <Form className="form" onSubmit={handleSubmit}>
+        <Form className="form shadow p-3 mb-5 bg-white rounded" onSubmit={handleSubmit}>
             <FormGroup className="form__field">
                 <Input
                     id="searchBar"

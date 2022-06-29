@@ -17,9 +17,12 @@ import './videoApp.css';
 const VideoApp = () => {
     const [showModal, closeModal, RenderModalContent, setContent] = useModal();
     const [getLocalStorage, setLocalStorage] = useLocalStorage();
-    const [setUrl, generateFetchParameters] = useFetchParametersGenerate();
-    const { data, loading, error } = useFetch(generateFetchParameters);
+    const [setUrl, generatedParameters] = useFetchParametersGenerate();
+    const { data, loading, error } = useFetch(generatedParameters);
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
+    const [favorite, setFavorite] = React.useState(false);
+
+    console.log('videos', videos);
 
     React.useEffect(() => {
         if (data?.length !== 0) {
@@ -37,6 +40,8 @@ const VideoApp = () => {
         setContent,
         showModal,
         setUrl,
+        favorite,
+        setFavorite,
     }));
 
     return (
@@ -52,8 +57,8 @@ const VideoApp = () => {
                 <Row className="main">
                     <Col className="main__col">
                         <h2 className="main__heading">Videos List</h2>
-                        {loading && <h3>Loading...</h3>}
-                        {error && <h3>Error</h3>}
+                        {loading && <h3 className="main__heading--loading">Loading...</h3>}
+                        {error && <h3 className="main__heading--error">Error</h3>}
                         <VideoList />
                     </Col>
                 </Row>

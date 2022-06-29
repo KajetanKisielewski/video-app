@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import React from 'react';
 import { Button } from 'reactstrap';
 import VideoContext from '../../context/VideoContext';
@@ -33,12 +31,11 @@ const VideoToolbox = () => {
 
     const setDemoVideoList = () => {
         const demos = createDemosList();
-
         videoContext.setUrl(demos);
     };
 
     return (
-        <div className="toolbox__actions">
+        <div className="toolbox__actions shadow p-3 mb-5 bg-white rounded">
             <Button className="actions actions__clear" onClick={clearVideoList}>
                 Wyczyść listę
             </Button>
