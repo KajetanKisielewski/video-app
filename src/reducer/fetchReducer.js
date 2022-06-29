@@ -1,6 +1,7 @@
 import { FETCH_ACTIONS } from '../helpers/actions';
 
 const fetchReducer = (state, { type, payload }) => {
+
     switch (type) {
         case FETCH_ACTIONS.API_REQUEST:
             return { ...state, loading: true };

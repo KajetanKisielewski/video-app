@@ -2,6 +2,8 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 
+import Confirmation from '../Confirmation/Confirmation';
+
 import VideoContext from '../../context/VideoContext';
 import { VIDEO_ACTIONS } from '../../helpers/actions';
 import { convertDate } from '../../helpers/auxiliaryFunctions';
@@ -14,7 +16,8 @@ const VideoItem = ({ videoData }) => {
     const videoContext = React.useContext(VideoContext);
 
     const removeVideo = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.REMOVE, payload: id });
+        videoContext.setContent(<Confirmation closeModal={videoContext.closeModal} id={id} />);
+        videoContext.showModal();
     };
 
     const setAsFavorite = () => {

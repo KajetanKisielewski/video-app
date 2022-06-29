@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import VideoContext from '../../context/VideoContext';
 import { VIDEO_ACTIONS } from '../../helpers/actions';
 import { createDemosList } from '../../helpers/auxiliaryFunctions';
+import Confirmation from '../Confirmation/Confirmation';
 
 import './videoToolbox.css';
 
@@ -10,7 +11,8 @@ const VideoToolbox = () => {
     const videoContext = React.useContext(VideoContext);
 
     const clearVideoList = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.CLEAR });
+        videoContext.setContent(<Confirmation closeModal={videoContext.closeModal} />);
+        videoContext.showModal();
     };
 
     const sortFromNewest = () => {

@@ -22,12 +22,20 @@
 }
 
 .video__title--tiles {
-   text-align: center;
+    text-align: center;
 }
 
 .video__title--list {
     grid-column: 2/6;
     grid-row: 1/2;
+}
+
+.video__title--tiles,
+.video__title--list {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .list__item--list {

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
@@ -6,6 +5,7 @@ import NavBar from '../NavBar/NavBar';
 import SearchBar from '../SearchBar/SearchBar';
 import VideoList from '../VideoList/VideoList';
 import VideoToolbox from '../VideoToolbox/VideoToolbox';
+import VideoPagination from '../VideoPagination/VideoPagination';
 
 import { useFetch, useLocalStorage, useModal, useFetchParametersGenerate } from '../../hooks';
 import { VIDEO_ACTIONS } from '../../helpers/actions';
@@ -22,7 +22,7 @@ const VideoApp = () => {
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
     const [favorite, setFavorite] = React.useState(false);
 
-    console.log('videos', videos);
+    const [currentPage, setCurrentPage] = React.useState(1);
 
     React.useEffect(() => {
         if (data?.length !== 0) {
@@ -34,11 +34,26 @@ const VideoApp = () => {
         setLocalStorage(videos);
     }, [videos]);
 
+    //  PAGINATION
+
+    const videoPerPage = 3;
+    const indexOfLastVideo = currentPage * videoPerPage;
+    const indexOfFirstVideo = indexOfLastVideo - videoPerPage;
+    const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(videos.length / videoPerPage); i += 1) {
+        pageNumbers.push(i);
+    }
+
+    //  PAGINATION
+
     const contextValues = React.useMemo(() => ({
-        videos,
+        videos: currentVideos,
         dispatch,
         setContent,
         showModal,
+        closeModal,
         setUrl,
         favorite,
         setFavorite,
@@ -60,6 +75,15 @@ const VideoApp = () => {
                         {loading && <h3 className="main__heading--loading">Loading...</h3>}
                         {error && <h3 className="main__heading--error">Error</h3>}
                         <VideoList />
+                    </Col>
+                </Row>
+                <Row className="footer">
+                    <Col>
+                        <VideoPagination
+                            currentPage={currentPage}
+                            pageNumbers={pageNumbers}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </Col>
                 </Row>
                 <RenderModalContent />
