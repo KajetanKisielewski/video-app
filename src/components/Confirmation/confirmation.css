@@ -1,32 +1,25 @@
 .modal__paragraph {
-    font-weight: 700;
-    letter-spacing: var(--letter-spacing-basic);
     margin: 1.5rem 0 2.5rem;
+    font-weight: 700;
+    font-size: 2rem;
     text-align: center;
+    letter-spacing: 0.1rem;
 }
 
 .modal__actions {
     display: flex;
-    gap: 2rem;
     justify-content: center;
+    gap: 2rem;
 }
 
 .modal__confirm,
 .modal__cancel {
-    border-radius: 12px;
-    box-shadow: var(--box-shadow-btn);
-    color: var(--white-basic);
-    font-weight: 700;
-    letter-spacing: var(--letter-spacing-basic);
     max-width: 120px;
-    padding: 0.5rem 0.75rem;
     width: 30%;
-}
-
-.modal__confirm {
-    background: var(--green-basic);
-}
-
-.modal__cancel {
-    background: var(--red-basic);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    color: rgba(254, 255, 255, 1);
+    font-weight: 700;
+    letter-spacing: 0.1rem;
 }

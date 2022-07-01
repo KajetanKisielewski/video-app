@@ -1,60 +1,84 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import VideoContext from '../../context/VideoContext';
-import { VIDEO_ACTIONS } from '../../helpers/actions';
+import { VIDEO_ACTIONS } from '../../helpers/reducersActions';
 import { createDemosList } from '../../helpers/auxiliaryFunctions';
 import Confirmation from '../Confirmation/Confirmation';
 
 import './videoToolbox.css';
 
 const VideoToolbox = () => {
-    const videoContext = React.useContext(VideoContext);
+    const {
+        setContent,
+        showModal,
+        closeModal,
+        dispatch,
+        setListView,
+        setUrl,
+        setCurrentPage,
+        setFavorite,
+        videos,
+    } = React.useContext(VideoContext);
 
     const clearVideoList = () => {
-        videoContext.setContent(<Confirmation closeModal={videoContext.closeModal} />);
-        videoContext.showModal();
+        setContent(<Confirmation closeModal={closeModal} />);
+        showModal();
     };
 
     const sortFromNewest = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.SORT_FROM_NEWEST });
+        dispatch({ type: VIDEO_ACTIONS.SORT_FROM_NEWEST });
     };
 
     const sortFromEldest = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.SORT_FROM_ELDEST });
-    };
-
-    const setTilesView = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.SET_TILES_VIEW });
-    };
-
-    const setListView = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.SET_LIST_VIEW });
+        dispatch({ type: VIDEO_ACTIONS.SORT_FROM_ELDEST });
     };
 
     const setDemoVideoList = () => {
         const demos = createDemosList();
-        videoContext.setUrl(demos);
+        setUrl(demos);
+        setCurrentPage(1);
+        setFavorite(false);
     };
 
     return (
         <div className="toolbox__actions shadow p-3 mb-5 bg-white rounded">
-            <Button className="actions actions__clear" onClick={clearVideoList}>
-                Wyczyść listę
+            <Button
+                className="actions actions__clear"
+                onClick={clearVideoList}
+                disabled={!videos.length}
+            >
+                Clear list
             </Button>
             <Button className="actions actions__upload" onClick={setDemoVideoList}>
-                Wgraj demo
+                Upload a demo
             </Button>
-            <Button className="actions actions__newest" onClick={sortFromNewest}>
-                Sortuj od najnowszych
+            <Button
+                className="actions actions__newest"
+                onClick={sortFromNewest}
+                disabled={!videos.length}
+            >
+                Sort from the newest
             </Button>
-            <Button className="actions actions__eldest" onClick={sortFromEldest}>
-                Sortuj od najstarszych
+            <Button
+                className="actions actions__eldest"
+                onClick={sortFromEldest}
+                disabled={!videos.length}
+            >
+                Sort from the oldest
             </Button>
-            <Button className="actions actions__list" onClick={setListView}>
-                Widok lista
+            <Button
+                className="actions actions__list"
+                onClick={() => setListView(true)}
+                disabled={!videos.length}
+            >
+                View: List
             </Button>
-            <Button className="actions actions__tiled" onClick={setTilesView}>
-                Widok kafelki
+            <Button
+                className="actions actions__tiles"
+                onClick={() => setListView(false)}
+                disabled={!videos.length}
+            >
+                View: tiles
             </Button>
         </div>
     );

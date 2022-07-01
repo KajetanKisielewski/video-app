@@ -1,11 +1,15 @@
 .form {
     width: 80%;
-    margin: 4rem auto;
+    margin: 5rem auto;
 }
 
 .form__field {
     position: relative;
-    padding: 2.5rem;
+    padding: 2.5rem 2.5rem 0.5rem;
+}
+
+.form .form__field--input {
+    margin-block-start: 1.5rem;
 }
 
 .form .form__field--label {
@@ -13,12 +17,22 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    color: rgb(93, 92, 97);
+    font-size: 1.6rem;
+    color: rgb(108, 117, 125);
+}
+
+.form__field--hint {
+    display: block;
+    padding-block-end: 2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(190, 85, 85);
 }
 
 .form .form__button {
     display: block;
-    margin: 0 auto;
+    margin: 2rem auto 0;
 }
 
 @media(min-width: 768px) {
@@ -27,18 +41,18 @@
     }
 
     .form .form__field--label {
-        left: 40px;
+        left: 3rem;
         transform: translateX(0);
         transition: 0.2s;
     }
 
     .form .form__field--input {
-        color: rgb(93, 92, 97);
+        color: rgb(108, 117, 125);
         background-color: transparent;
         outline: none;
         box-shadow: none;
         border: none;
-        border-bottom: 0.2rem solid rgb(18, 153, 142);
+        border-bottom: 0.2rem solid rgb(108, 117, 125);;
     }
 
     .form .form__field--input::placeholder {
@@ -56,20 +70,30 @@
         box-shadow: none;
         background-color: transparent;
         border-width: 0.3rem;
-        border-image: linear-gradient( to right, rgb(18, 153, 142), rgb(56, 239, 125) );
+        border-image: linear-gradient( to right, rgb(146, 146, 146), rgb(211, 211, 211) );
         border-image-slice: 1;
     }
 
     .form .form__field--input:focus-visible {
         outline: 0;
-        box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+        box-shadow: 0 0 0 0.25rem rgba(211, 211, 211, 0.25);
     }
 
     .form .form__field--input:focus ~ .form__field--label{
         position: absolute;
         top: 0;
-        transition: 0.2s;
-        color: rgb(18, 153, 142);
         font-weight:700;
+        color: rgb(146, 146, 146);
+        transition: 0.2s;
     }
+
+    .form .form__button {
+        padding-block: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .form__field--hint {
+        padding-block-end: 0;
+    }
+
 }

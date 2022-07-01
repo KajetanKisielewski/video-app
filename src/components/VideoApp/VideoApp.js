@@ -8,9 +8,15 @@ import VideoToolbox from '../VideoToolbox/VideoToolbox';
 import VideoPagination from '../VideoPagination/VideoPagination';
 
 import { useFetch, useLocalStorage, useModal, useFetchParametersGenerate } from '../../hooks';
-import { VIDEO_ACTIONS } from '../../helpers/actions';
+import { VIDEO_ACTIONS } from '../../helpers/reducersActions';
 import { videoReducer } from '../../reducer';
 import VideoContext from '../../context/VideoContext';
+import {
+    generateVideosToDisplay,
+    generatePageNumbers,
+    renderFavouriteVideosSubheading,
+    renderAllVideoSubheading,
+} from '../../helpers/auxiliaryFunctions';
 
 import './videoApp.css';
 
@@ -20,8 +26,8 @@ const VideoApp = () => {
     const [setUrl, generatedParameters] = useFetchParametersGenerate();
     const { data, loading, error } = useFetch(generatedParameters);
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
-    const [favorite, setFavorite] = React.useState(false);
-
+    const [showFavorite, setShowFavorite] = React.useState(false);
+    const [listView, setListView] = React.useState(false);
     const [currentPage, setCurrentPage] = React.useState(1);
 
     React.useEffect(() => {
@@ -34,29 +40,20 @@ const VideoApp = () => {
         setLocalStorage(videos);
     }, [videos]);
 
-    //  PAGINATION
-
-    const videoPerPage = 3;
-    const indexOfLastVideo = currentPage * videoPerPage;
-    const indexOfFirstVideo = indexOfLastVideo - videoPerPage;
-    const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
-    const pageNumbers = [];
-
-    for (let i = 1; i <= Math.ceil(videos.length / videoPerPage); i += 1) {
-        pageNumbers.push(i);
-    }
-
-    //  PAGINATION
-
     const contextValues = React.useMemo(() => ({
-        videos: currentVideos,
+        videos: generateVideosToDisplay(currentPage, videos),
         dispatch,
         setContent,
         showModal,
         closeModal,
         setUrl,
-        favorite,
-        setFavorite,
+        favorite: showFavorite,
+        setFavorite: setShowFavorite,
+        currentPage,
+        setCurrentPage,
+        pageNumbers: generatePageNumbers(videos, showFavorite),
+        listView,
+        setListView,
     }));
 
     return (
@@ -69,21 +66,21 @@ const VideoApp = () => {
                         <VideoToolbox />
                     </Col>
                 </Row>
-                <Row className="main">
+                <Row className="main shadow p-3 mb-5 bg-white rounded">
                     <Col className="main__col">
-                        <h2 className="main__heading">Videos List</h2>
-                        {loading && <h3 className="main__heading--loading">Loading...</h3>}
-                        {error && <h3 className="main__heading--error">Error</h3>}
+                        <h2 className="main__heading">
+                            {showFavorite ? 'Favorite Videos' : 'Videos List'}
+                        </h2>
+                        {loading && <h3 className="main__subheading--loading">Loading...</h3>}
+                        {error && <h3 className="main__subheading--error">Error</h3>}
+                        {renderAllVideoSubheading(videos, showFavorite)}
+                        {renderFavouriteVideosSubheading(videos, showFavorite)}
                         <VideoList />
                     </Col>
                 </Row>
-                <Row className="footer">
+                <Row>
                     <Col>
-                        <VideoPagination
-                            currentPage={currentPage}
-                            pageNumbers={pageNumbers}
-                            setCurrentPage={setCurrentPage}
-                        />
+                        <VideoPagination />
                     </Col>
                 </Row>
                 <RenderModalContent />

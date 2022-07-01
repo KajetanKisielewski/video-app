@@ -1,24 +1,25 @@
 import React, { useContext } from 'react';
+import { Button } from 'reactstrap';
 
 import VideoContext from '../../context/VideoContext';
-import { VIDEO_ACTIONS } from '../../helpers/actions';
+import { VIDEO_ACTIONS } from '../../helpers/reducersActions';
 
 import './confirmation.css';
 
 const Confirmation = (props) => {
-    const { closeModal, id = null } = props;
+    const { id = null } = props;
 
-    const videoContext = useContext(VideoContext);
+    const { dispatch, closeModal } = useContext(VideoContext);
 
     const setParagraphContent = () => (id ? 'Remove video?' : 'Clear the board?');
 
     const clearBoard = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.CLEAR });
+        dispatch({ type: VIDEO_ACTIONS.CLEAR });
         return closeModal();
     };
 
     const removeTask = () => {
-        videoContext.dispatch({ type: VIDEO_ACTIONS.REMOVE, payload: id });
+        dispatch({ type: VIDEO_ACTIONS.REMOVE, payload: id });
         return closeModal();
     };
 
@@ -28,12 +29,12 @@ const Confirmation = (props) => {
         <>
             <p className="modal__paragraph">{setParagraphContent()}</p>
             <div className="modal__actions">
-                <button className="modal__confirm" onClick={handleRemove} type="button">
-                    yes
-                </button>
-                <button className="modal__cancel" onClick={() => closeModal()} type="button">
-                    no
-                </button>
+                <Button className="modal__confirm" onClick={handleRemove}>
+                    YES
+                </Button>
+                <Button className="modal__cancel" onClick={() => closeModal()} type="button">
+                    NO
+                </Button>
             </div>
         </>
     );

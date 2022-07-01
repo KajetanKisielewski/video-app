@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { FETCH_ACTIONS } from '../helpers/actions';
+import { FETCH_ACTIONS } from '../helpers/reducersActions';
 import { fetchReducer } from '../reducer';
-import { createInitState } from '../helpers/auxiliaryFunctions';
+import { setInitState } from '../helpers/auxiliaryFunctions';
 
 const useFetch = (generatedFetchParameters) => {
-    const [state, dispatch] = React.useReducer(fetchReducer, createInitState());
+    const [state, dispatch] = React.useReducer(fetchReducer, setInitState());
 
     React.useEffect(() => {
         generatedFetchParameters.forEach((item) => {
@@ -19,7 +19,7 @@ const useFetch = (generatedFetchParameters) => {
 
                     return Promise.reject(resp);
                 })
-                .then( (resp) => {
+                .then((resp) => {
                     dispatch({ type: FETCH_ACTIONS.FETCH_DATA, payload: resp });
                 })
                 .catch((err) => {

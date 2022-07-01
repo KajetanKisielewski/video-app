@@ -2,15 +2,29 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 2rem;
 
     text-align: center;
-    margin: 0 auto;
 }
 
 .main__heading,
-.main__heading--loading,
-.main__heading--loading {
+.main__subheading--loading,
+.main__subheading--error,
+.main__subheading--favorites,
+.main__subheading--all {
     width: 100%;
     margin-block-end: 2rem;
-    padding: 2rem;
+    padding: 1rem;
+    font-size: 2.5rem;
+}
+
+.main__heading {
+    font-size: 3rem;
+}
+
+
+@media (min-width: 515px) {
+    .main__col {
+        justify-content: space-evenly;
+    }
 }

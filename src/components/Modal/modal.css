@@ -4,9 +4,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    padding: 5rem 2rem;
-    background-color: rgb(223, 209, 198);
-    border: 0.4rem solid rgb(18, 153, 142);
+    padding: 7rem 3rem;
+    background-color: rgb(245, 239, 234);
+    border: 0.4rem solid rgb(108, 117, 125);
     z-index: 10;
 }
 
@@ -18,7 +18,7 @@
     border: none;
     font-size: 3rem;
     font-weight: bold;
-    color:rgb(18, 153, 142);;
+    color:rgb(108, 117, 125);
 }
 
 

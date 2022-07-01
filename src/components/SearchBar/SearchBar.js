@@ -2,14 +2,18 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import VideoContext from '../../context/VideoContext';
-import { clearInputValue } from '../../helpers/auxiliaryFunctions';
+import {
+    clearInputValue,
+    isValidInputValue,
+    setValidationHint,
+} from '../../helpers/auxiliaryFunctions';
 
 import './searchBar.css';
 
 const SearchBar = () => {
     const [state, setState] = React.useState([]);
 
-    const videoContext = React.useContext(VideoContext);
+    const { setUrl } = React.useContext(VideoContext);
 
     const handleChange = (e) => {
         const { value } = e.target;
@@ -18,9 +22,7 @@ const SearchBar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        videoContext.setUrl([state]);
-
+        setUrl([state]);
         clearInputValue('.form__field--input');
     };
 
@@ -42,7 +44,10 @@ const SearchBar = () => {
                     Enter your link
                 </Label>
             </FormGroup>
-            <Button className="form__button">Submit</Button>
+            {setValidationHint(state)}
+            <Button className="form__button" disabled={!isValidInputValue(state)}>
+                Add Video !
+            </Button>
         </Form>
     );
 };

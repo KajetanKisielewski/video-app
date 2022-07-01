@@ -8,24 +8,26 @@ import './navBar.css';
 const NavBar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
 
-    const videoContext = React.useContext(VideoContext);
+    const { setFavorite, setCurrentPage } = React.useContext(VideoContext);
 
-    const toggle = () => setIsOpen(!isOpen);
+    const toggleNav = () => setIsOpen(!isOpen);
 
     const showFavoriteVideos = (e) => {
         e.preventDefault();
-        videoContext.setFavorite(true);
+        setFavorite(true);
+        setCurrentPage(1);
     };
 
     const showAllVideos = (e) => {
         e.preventDefault();
-        videoContext.setFavorite(false);
+        setFavorite(false);
+        setCurrentPage(1);
     };
 
     return (
         <Navbar className="nav" color="dark" dark expand="md" sticky="top">
             <NavbarBrand href="/">Video App</NavbarBrand>
-            <NavbarToggler onClick={toggle} />
+            <NavbarToggler onClick={toggleNav} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
@@ -34,7 +36,7 @@ const NavBar = () => {
                             href="/"
                             onClick={showAllVideos}
                         >
-                            Wszystkie filmy
+                            All Videos
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -43,7 +45,7 @@ const NavBar = () => {
                             href="/"
                             onClick={showFavoriteVideos}
                         >
-                            Ulubione
+                            Favorites
                         </NavLink>
                     </NavItem>
                 </Nav>
