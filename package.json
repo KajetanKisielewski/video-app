@@ -8,9 +8,17 @@
         "start": "webpack-dev-server --open",
         "build": "webpack --mode production"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://https://github.com/KajetanKisielewski/video-app"
+    },
     "keywords": [],
-    "author": "",
+    "author": "Kajetan Kisielewski",
     "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/KajetanKisielewski/video-app/issues"
+    },
+    "homepage": "https://github.com/KajetanKisielewski/video-app#readme",
     "devDependencies": {
         "@babel/core": "^7.6.4",
         "@babel/eslint-parser": "^7.16.5",
