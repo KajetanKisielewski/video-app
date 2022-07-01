@@ -12,7 +12,8 @@ import './videoItem.css';
 const VideoItem = ({ videoData }) => {
     const { id, title, likeCount, viewCount, videoThumb, dateAdded, player } = videoData;
 
-    const { setContent, showModal, dispatch, listView, favorite } = React.useContext(VideoContext);
+    const { setContent, showModal, dispatch, listView, showFavorite } =
+        React.useContext(VideoContext);
 
     const removeVideo = () => {
         setContent(<Confirmation id={id} />);
@@ -57,9 +58,9 @@ const VideoItem = ({ videoData }) => {
             </Button>
             <Button
                 className={`video__button--${setClassNameModifier()}`}
-                onClick={() => toggleFavoriteState(!favorite)}
+                onClick={() => toggleFavoriteState(!showFavorite)}
             >
-                {favorite ? 'Remove from favorites' : 'Add to favorites'}
+                {showFavorite ? 'Remove from favorites' : 'Add to favorites'}
             </Button>
         </div>
     );

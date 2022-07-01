@@ -227,7 +227,9 @@ export const createDemosList = () => [
     'https://www.youtube.com/watch?v=J2ESK7wvS8U&ab_channel=SBMLabel',
     'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley',
     'https://www.youtube.com/watch?v=uXapuO0tgmc&ab_channel=DanMusic',
-    'https://www.youtube.com/watch?v=RH-9z3XsMlI&ab_channel=MeskieGranie',
+    'https://vimeo.com/653430917',
+    'https://vimeo.com/721894139',
+    'https://vimeo.com/716208763',
 ];
 
 export const clearInputValue = (className) => {

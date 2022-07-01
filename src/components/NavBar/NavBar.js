@@ -8,19 +8,19 @@ import './navBar.css';
 const NavBar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
 
-    const { setFavorite, setCurrentPage } = React.useContext(VideoContext);
+    const { setShowFavorite, setCurrentPage } = React.useContext(VideoContext);
 
     const toggleNav = () => setIsOpen(!isOpen);
 
     const showFavoriteVideos = (e) => {
         e.preventDefault();
-        setFavorite(true);
+        setShowFavorite(true);
         setCurrentPage(1);
     };
 
     const showAllVideos = (e) => {
         e.preventDefault();
-        setFavorite(false);
+        setShowFavorite(false);
         setCurrentPage(1);
     };
 

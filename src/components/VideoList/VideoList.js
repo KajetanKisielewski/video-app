@@ -4,7 +4,7 @@ import VideoItem from '../VideoItem/VideoItem';
 import VideoContext from '../../context/VideoContext';
 
 const VideoList = () => {
-    const { videos, favorite } = React.useContext(VideoContext);
+    const { videos, showFavorite } = React.useContext(VideoContext);
 
     const renderAllVideoItems = () =>
         videos?.map((video) => <VideoItem key={video.id} videoData={video} />);
@@ -14,7 +14,7 @@ const VideoList = () => {
             video.isFavorite ? <VideoItem key={video.id} videoData={video} /> : null,
         );
 
-    const renderVideoItems = () => (favorite ? renderFavVideoItems() : renderAllVideoItems());
+    const renderVideoItems = () => (showFavorite ? renderFavVideoItems() : renderAllVideoItems());
 
     return <>{renderVideoItems()}</>;
 };

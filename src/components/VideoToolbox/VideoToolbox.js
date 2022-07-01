@@ -16,7 +16,7 @@ const VideoToolbox = () => {
         setListView,
         setUrl,
         setCurrentPage,
-        setFavorite,
+        setShowFavorite,
         videos,
     } = React.useContext(VideoContext);
 
@@ -37,7 +37,7 @@ const VideoToolbox = () => {
         const demos = createDemosList();
         setUrl(demos);
         setCurrentPage(1);
-        setFavorite(false);
+        setShowFavorite(false);
     };
 
     return (
