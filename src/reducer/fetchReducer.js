@@ -5,7 +5,7 @@ const fetchReducer = (state, { type, payload }) => {
         case FETCH_ACTIONS.API_REQUEST:
             return { ...state, loading: true };
         case FETCH_ACTIONS.FETCH_DATA:
-            return { ...state, data: payload, loading: false };
+            return { ...state, fetchedData: payload, loading: false };
         case FETCH_ACTIONS.ERROR:
             return { ...state, error: payload };
         default:

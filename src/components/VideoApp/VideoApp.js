@@ -25,17 +25,17 @@ const VideoApp = () => {
     const [showModal, closeModal, RenderModalContent, setContent] = useModal();
     const [getLocalStorage, setLocalStorage] = useLocalStorage();
     const [setUrl, generatedParameters] = useFetchParametersGenerate();
-    const { data, loading, error } = useFetch(generatedParameters);
+    const { fetchedData, loading, error } = useFetch(generatedParameters);
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
     const [showFavorite, setShowFavorite] = React.useState(false);
     const [listView, setListView] = React.useState(false);
     const [currentPage, setCurrentPage] = React.useState(1);
 
     React.useEffect(() => {
-        if (data?.length !== 0) {
-            dispatch({ type: VIDEO_ACTIONS.ADD, payload: data });
+        if (fetchedData?.length !== 0) {
+            dispatch({ type: VIDEO_ACTIONS.ADD, payload: fetchedData });
         }
-    }, [data]);
+    }, [fetchedData]);
 
     React.useEffect(() => {
         setLocalStorage(videos);

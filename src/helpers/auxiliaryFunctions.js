@@ -218,7 +218,7 @@ export const setValidationHint = (value) => {
 // single functions without categories
 
 export const setInitState = () => ({
-    data: [],
+    fetchedData: [],
     loading: false,
     error: null,
 });
