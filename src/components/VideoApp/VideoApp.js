@@ -16,6 +16,7 @@ import {
     generatePageNumbers,
     renderFavouriteVideosSubheading,
     renderAllVideoSubheading,
+    setClassNameModifier,
 } from '../../helpers/auxiliaryFunctions';
 
 import './videoApp.css';
@@ -67,7 +68,7 @@ const VideoApp = () => {
                     </Col>
                 </Row>
                 <Row className="main shadow p-3 mb-5 bg-white rounded">
-                    <Col className="main__col">
+                    <Col className={`main__col main__col--${setClassNameModifier(listView)}`}>
                         <h2 className="main__heading">
                             {showFavorite ? 'Favorite Videos' : 'Videos List'}
                         </h2>

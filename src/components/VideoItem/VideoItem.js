@@ -5,7 +5,11 @@ import Confirmation from '../Confirmation/Confirmation';
 
 import VideoContext from '../../context/VideoContext';
 import { VIDEO_ACTIONS } from '../../helpers/reducersActions';
-import { convertDate, setIframeStructure } from '../../helpers/auxiliaryFunctions';
+import {
+    convertDate,
+    setIframeStructure,
+    setClassNameModifier,
+} from '../../helpers/auxiliaryFunctions';
 
 import './videoItem.css';
 
@@ -33,31 +37,40 @@ const VideoItem = ({ videoData }) => {
         showModal();
     };
 
-    const setClassNameModifier = () => (listView ? 'list' : 'tiles');
-
     const renderVideoItem = () => (
-        <div className={`main__video--${setClassNameModifier()} shadow p-3 mb-5 bg-white rounded`}>
-            <h3 className={`video__title--${setClassNameModifier()}`}>{title}</h3>
-            <ul className={`video__list--${setClassNameModifier()}`}>
-                <li className={`list__item list__item--${setClassNameModifier()}`}>
+        <div
+            className={`main__video--${setClassNameModifier(listView)}
+            shadow p-3 mb-5 bg-white rounded`}
+        >
+            <h3 className={`video__title--${setClassNameModifier(listView)}`}>{title}</h3>
+            <ul className={`video__list--${setClassNameModifier(listView)}`}>
+                <li className={`list__item list__item--${setClassNameModifier(listView)}`}>
                     <img
-                        className={`item__img--${setClassNameModifier()}`}
+                        className={`item__img--${setClassNameModifier(listView)}`}
                         src={videoThumb}
                         alt="video thumbnail"
+                        onClick={watchVideo}
+                        role="presentation"
                     />
                 </li>
                 <li className="list__item">Likes: {likeCount}</li>
                 <li className="list__item">Vievs: {viewCount}</li>
                 <li className="list__item">Added at: {convertDate(dateAdded)}</li>
             </ul>
-            <Button className={`video__button--${setClassNameModifier()}`} onClick={watchVideo}>
+            <Button
+                className={`video__button--${setClassNameModifier(listView)}`}
+                onClick={watchVideo}
+            >
                 Watch it
             </Button>
-            <Button className={`video__button--${setClassNameModifier()}`} onClick={removeVideo}>
+            <Button
+                className={`video__button--${setClassNameModifier(listView)}`}
+                onClick={removeVideo}
+            >
                 Delete
             </Button>
             <Button
-                className={`video__button--${setClassNameModifier()}`}
+                className={`video__button--${setClassNameModifier(listView)}`}
                 onClick={() => toggleFavoriteState(!showFavorite)}
             >
                 {showFavorite ? 'Remove from favorites' : 'Add to favorites'}

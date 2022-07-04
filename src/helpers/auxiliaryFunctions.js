@@ -115,7 +115,7 @@ export const generateFetchParameters = (url) => {
 //  Functions for generate pagination dependencies
 
 const setVideosQuantityPerPage = () => {
-    const videoQuantityPerPage = 4;
+    const videoQuantityPerPage = 6;
     return videoQuantityPerPage;
 };
 
@@ -238,3 +238,5 @@ export const clearInputValue = (className) => {
 };
 
 export const convertDate = (date) => new Date(date).toISOString().slice(0, 10);
+
+export const setClassNameModifier = (listView) => (listView ? 'list' : 'tiles');
