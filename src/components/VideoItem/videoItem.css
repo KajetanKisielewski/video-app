@@ -1,10 +1,10 @@
 .main__video--tiles {
-    display: flex;
+    display: flex;;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: var(--align-center);
+    align-items: var(--align-center);
 
-    width: 230px;
+    width: var(--tiles-item-width);
     padding: 2rem;
 }
 
@@ -13,13 +13,13 @@
     display: grid;
     grid-template-columns: 100px 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 10px;
-    width: 530px;
+    gap: var(--gap-small);
+    width: var(--list-item-width);
     min-height: 121px;
 }
 
 .video__title--tiles {
-    text-align: center;
+    text-align: var(--align-center);
 }
 
 .video__title--list {
@@ -38,7 +38,7 @@
 .list__item--list {
     position: absolute;
     top: 10px;
-    left:0;
+    left: 0;
     grid-column: 1/2;
     grid-row: 1/3;
     width: 100px;
@@ -55,24 +55,24 @@
 }
 
 .video__list--list {
-    padding: 0;
-    list-style: none;
     grid-column: 2/6;
     grid-row: 2/3;
     display: flex;
     justify-content: space-around;
+    padding: 0;
+    list-style: none;
 }
 
 .item__img--list {
     width: 100%;
     height: 100%;
-    cursor: pointer;
+    cursor: var(--cursor-highlighted);
 }
 
 .item__img--tiles {
     width: 100%;
     margin-block: 1.5rem;
-    cursor: pointer;
+    cursor: var(--cursor-highlighted);
 }
 
 .video__button--tiles {

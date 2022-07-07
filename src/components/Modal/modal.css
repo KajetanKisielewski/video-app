@@ -5,8 +5,8 @@
     transform: translate(-50%, -50%);
     width: 90%;
     padding: 7rem 3rem;
-    background-color: rgb(245, 239, 234);
-    border: 0.4rem solid rgb(108, 117, 125);
+    background-color: var(--modal-background-color);
+    border: 0.4rem solid var(--main-app-color);
     z-index: 10;
 }
 
@@ -14,18 +14,17 @@
     position: absolute;
     top: 0.2rem;
     right: 1rem;
-    background: none;
+    background: var(--color-transparent);
     border: none;
     font-size: 3rem;
-    font-weight: bold;
-    color:rgb(108, 117, 125);
+    font-weight: var(--font-weight-bold);
+    color:var(--main-app-color);
 }
-
 
 .app__modal--overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.7);;
+    background-color: var(--modal-overlay-color);
     z-index: 10;
 }
 

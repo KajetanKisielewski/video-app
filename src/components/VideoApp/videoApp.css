@@ -1,16 +1,16 @@
 .main__col {
     display: grid;
-    grid-gap:2rem;
-    justify-items: center;
-    text-align: center;
+    grid-gap: var(--gap-basic);
+    justify-items: var(--align-center);
+    text-align: var(--align-center);
 }
 
 .main__col--tiles {
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--tiles-item-width), 1fr));
 }
 
 .main__col--list {
-    grid-template-columns: repeat(auto-fit, minmax(530px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--list-item-width), 1fr));
 }
 
 .main__heading,

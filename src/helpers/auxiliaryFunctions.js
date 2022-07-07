@@ -2,7 +2,6 @@
 import React from 'react';
 
 import { v4 as uuid } from 'uuid';
-import { YOUTUBE_API_KEY, VIMEO_API_KEY } from '../../apiKeys';
 
 //  Functions for generate Video Structure
 
@@ -75,7 +74,7 @@ const getVimeoVideoID = (url) => {
 };
 
 const generateFetchParametersForYoutube = (url) => {
-    const KEY = YOUTUBE_API_KEY;
+    const KEY = process.env.YOUTUBE_API_KEY;
     const baseURL = `https://www.googleapis.com/youtube/v3/videos`;
     const youtubeVideoID = getYoutubeVideoID(url);
 
@@ -85,7 +84,7 @@ const generateFetchParametersForYoutube = (url) => {
 };
 
 const generateFetchParametersForVimeo = (url) => {
-    const key = VIMEO_API_KEY;
+    const key = process.env.VIMEO_API_KEY;
     const baseURL = 'https://api.vimeo.com/videos/';
     const vimeoVideoID = getVimeoVideoID(url);
 

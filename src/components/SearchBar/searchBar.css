@@ -18,16 +18,16 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.6rem;
-    color: rgb(108, 117, 125);
+    color: var(--main-app-color)
 }
 
 .form__field--hint {
     display: block;
     padding-block-end: 2rem;
     font-size: 1.3rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(190, 85, 85);
+    font-weight: var(--font-weight-bold);
+    text-align: var(--align-center);
+    color: var(--validation-hint-color)
 }
 
 .form .form__button {
@@ -43,20 +43,20 @@
     .form .form__field--label {
         left: 3rem;
         transform: translateX(0);
-        transition: 0.2s;
+        transition: var(--transition);
     }
 
     .form .form__field--input {
-        color: rgb(108, 117, 125);
-        background-color: transparent;
+        color: var(--main-app-color);
+        background-color: var(--color-transparent);
         outline: none;
         box-shadow: none;
         border: none;
-        border-bottom: 0.2rem solid rgb(108, 117, 125);;
+        border-bottom: 0.2rem solid var(--main-app-color);
     }
 
     .form .form__field--input::placeholder {
-        color: transparent;
+        color: var(--color-transparent);
     }
 
     .form .form__field--input:placeholder-shown ~ .form__field--label {
@@ -65,26 +65,26 @@
 
     .form .form__field--input:focus {
         padding-bottom: 0.5rem;
-        font-weight: bold;
+        font-weight: var(--font-weight-bold);
         outline: none;
         box-shadow: none;
-        background-color: transparent;
+        background-color: var(--color-transparent);
         border-width: 0.3rem;
-        border-image: linear-gradient( to right, rgb(146, 146, 146), rgb(211, 211, 211) );
+        border-image: var(--input-border-color);
         border-image-slice: 1;
     }
 
     .form .form__field--input:focus-visible {
-        outline: 0;
-        box-shadow: 0 0 0 0.25rem rgba(211, 211, 211, 0.25);
+        outline: none;
+        box-shadow:var(--input-box-shadow);
     }
 
     .form .form__field--input:focus ~ .form__field--label{
         position: absolute;
         top: 0;
-        font-weight:700;
-        color: rgb(146, 146, 146);
-        transition: 0.2s;
+        font-weight: var(--font-weight-bold);
+        color: var(--label-color);
+        transition: var(--transition);
     }
 
     .form .form__button {

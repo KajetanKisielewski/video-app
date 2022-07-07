@@ -1,5 +1,5 @@
 .navbar-nav {
-    text-align: center;
+    text-align: var(--align-center);
 }
 
 .header .header__col {

@@ -1,15 +1,15 @@
 .modal__paragraph {
     margin: 1.5rem 0 2.5rem;
-    font-weight: 700;
     font-size: 2rem;
-    text-align: center;
-    letter-spacing: 0.1rem;
+    font-weight: var(--font-weight-bold);
+    text-align: var(--align-center);
+    letter-spacing: var(--letter-spacing-basic);
 }
 
 .modal__actions {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: var(--align-center);
+    gap: var(--gap-basic);
 }
 
 .modal__confirm,
@@ -17,9 +17,8 @@
     max-width: 120px;
     width: 30%;
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    color: rgba(254, 255, 255, 1);
-    font-weight: 700;
-    letter-spacing: 0.1rem;
+    box-shadow: var(--modal-box-shadow);
+    color: var(--white-color-basic);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-basic);
 }
