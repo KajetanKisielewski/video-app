@@ -17,7 +17,7 @@
 
 ### Links:
 
-- Live: [Check it out]()
+- Live: [Check it out](https://kajetankisielewski.github.io/video-app/)
 
 
 ### The challenge
