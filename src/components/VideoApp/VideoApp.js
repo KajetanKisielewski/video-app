@@ -25,11 +25,12 @@ const VideoApp = () => {
     const [showModal, closeModal, RenderModalContent, setContent] = useModal();
     const [getLocalStorage, setLocalStorage] = useLocalStorage();
     const [setUrl, generatedParameters] = useFetchParametersGenerate();
-    const { fetchedData, loading, error } = useFetch(generatedParameters);
+    const { fetchedData, loading } = useFetch(generatedParameters);
     const [videos, dispatch] = React.useReducer(videoReducer, getLocalStorage() || []);
     const [showFavorite, setShowFavorite] = React.useState(false);
     const [listView, setListView] = React.useState(false);
     const [currentPage, setCurrentPage] = React.useState(1);
+    const [videosQuantityPerPage, setVideosQuantityPerPage] = React.useState(6);
 
     React.useEffect(() => {
         if (fetchedData?.length !== 0) {
@@ -42,7 +43,7 @@ const VideoApp = () => {
     }, [videos]);
 
     const contextValues = React.useMemo(() => ({
-        videos: generateVideosToDisplay(currentPage, videos),
+        videos: generateVideosToDisplay(currentPage, videos, videosQuantityPerPage),
         dispatch,
         setContent,
         showModal,
@@ -52,9 +53,10 @@ const VideoApp = () => {
         setShowFavorite,
         currentPage,
         setCurrentPage,
-        pageNumbers: generatePageNumbers(videos, showFavorite),
+        pageNumbers: generatePageNumbers(videos, showFavorite, currentPage, videosQuantityPerPage),
         listView,
         setListView,
+        setVideosQuantityPerPage,
     }));
 
     return (
@@ -72,8 +74,7 @@ const VideoApp = () => {
                         <h2 className="main__heading">
                             {showFavorite ? 'Favorite Videos' : 'Videos List'}
                         </h2>
-                        {loading && <h3 className="main__subheading--loading">Loading...</h3>}
-                        {error && <h3 className="main__subheading--error">Error</h3>}
+                        <h3 className="main__subheading--loading">{loading && 'Loading...'}</h3>
                         {renderAllVideoSubheading(videos, showFavorite)}
                         {renderFavouriteVideosSubheading(videos, showFavorite)}
                         <VideoList />

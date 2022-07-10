@@ -37,7 +37,7 @@
 
 @media(min-width: 768px) {
     .form {
-        width: 70%;
+        width: 50%;
     }
 
     .form .form__field--label {
@@ -47,6 +47,7 @@
     }
 
     .form .form__field--input {
+        font-size: 1.5rem;
         color: var(--main-app-color);
         background-color: var(--color-transparent);
         outline: none;

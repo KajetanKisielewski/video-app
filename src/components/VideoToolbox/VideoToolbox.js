@@ -22,7 +22,9 @@ const VideoToolbox = () => {
 
     const clearVideoList = () => {
         setContent(<Confirmation closeModal={closeModal} />);
+        setCurrentPage(1);
         showModal();
+        setShowFavorite(false);
     };
 
     const sortFromNewest = () => {

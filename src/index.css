@@ -18,6 +18,8 @@
     --input-box-shadow:  0 0 0 0.25rem rgba(211, 211, 211, 0.25);
     --label-color: rgb(146, 146, 146);
     --color-transparent: transparent;
+    --button-color: rgb(108, 117, 125);
+    --favorites-color: rgb(255, 0, 0);
 
     --gap-small: 1rem;
     --gap-basic: 2rem;

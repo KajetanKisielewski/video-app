@@ -1,10 +1,12 @@
 import { VIDEO_ACTIONS } from '../helpers/reducersActions';
-import { setStructureVideoData } from '../helpers/auxiliaryFunctions';
+import { setStructureVideoData, isNotDuplicate } from '../helpers/auxiliaryFunctions';
 
 const videoReducer = (state, { type, payload }) => {
     switch (type) {
         case VIDEO_ACTIONS.ADD:
-            return [...state, setStructureVideoData(payload)];
+            return isNotDuplicate(state, payload)
+                ? [...state, setStructureVideoData(payload)]
+                : [...state];
 
         case VIDEO_ACTIONS.REMOVE:
             return state.filter((item) => item.id !== payload);

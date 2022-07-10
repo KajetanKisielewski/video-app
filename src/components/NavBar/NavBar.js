@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 
 import VideoContext from '../../context/VideoContext';
+import { stopRedirect } from '../../helpers/auxiliaryFunctions';
 
 import './navBar.css';
 
@@ -13,20 +14,22 @@ const NavBar = () => {
     const toggleNav = () => setIsOpen(!isOpen);
 
     const showFavoriteVideos = (e) => {
-        e.preventDefault();
+        stopRedirect(e);
         setShowFavorite(true);
         setCurrentPage(1);
     };
 
     const showAllVideos = (e) => {
-        e.preventDefault();
+        stopRedirect(e);
         setShowFavorite(false);
         setCurrentPage(1);
     };
 
     return (
         <Navbar className="nav" color="dark" dark expand="md" sticky="top">
-            <NavbarBrand href="/">Video App</NavbarBrand>
+            <NavbarBrand href="/" onClick={stopRedirect}>
+                Video App
+            </NavbarBrand>
             <NavbarToggler onClick={toggleNav} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>

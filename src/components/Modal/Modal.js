@@ -8,7 +8,7 @@ const Modal = (props) => {
 
     return ReactDom.createPortal(
         <>
-            <div className="app__modal--overlay" />
+            <div className="app__modal--overlay" onClick={closeModal} role="presentation" />
             <div className="app__modal--content">
                 {content}
                 <button

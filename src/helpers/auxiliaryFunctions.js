@@ -37,6 +37,15 @@ const destructurizeVimeoObject = (videoData) => {
     };
 };
 
+export const isNotDuplicate = (videoState, videoData) => {
+    const youtubeVideoTitle = videoData?.items?.[0]?.snippet?.title;
+    const vimeoVideoTitle = videoData?.name;
+
+    const title = youtubeVideoTitle || vimeoVideoTitle;
+
+    return videoState.every((item) => item.title !== title);
+};
+
 export const setStructureVideoData = (videoData) => {
     const youTubeData = videoData?.items?.[0];
     const vimeoData = videoData;
@@ -84,7 +93,7 @@ const generateFetchParametersForYoutube = (url) => {
 };
 
 const generateFetchParametersForVimeo = (url) => {
-    const key = process.env.VIMEO_API_KEY;
+    const KEY = process.env.VIMEO_API_KEY;
     const baseURL = 'https://api.vimeo.com/videos/';
     const vimeoVideoID = getVimeoVideoID(url);
 
@@ -93,7 +102,7 @@ const generateFetchParametersForVimeo = (url) => {
     const options = {
         method: 'GET',
         headers: {
-            Authorization: `bearer ${key}`,
+            Authorization: `bearer ${KEY}`,
         },
     };
 
@@ -113,13 +122,8 @@ export const generateFetchParameters = (url) => {
 
 //  Functions for generate pagination dependencies
 
-const setVideosQuantityPerPage = () => {
-    const videoQuantityPerPage = 6;
-    return videoQuantityPerPage;
-};
-
-export const generateVideosToDisplay = (currentPage, videos) => {
-    const videoPerPage = setVideosQuantityPerPage();
+export const generateVideosToDisplay = (currentPage, videos, videosQuantityPerPage) => {
+    const videoPerPage = videosQuantityPerPage;
 
     const indexOfLastVideo = currentPage * videoPerPage;
     const indexOfFirstVideo = indexOfLastVideo - videoPerPage;
@@ -134,15 +138,27 @@ const generateVideoQuantity = (videos, favorite) => {
     return favorite ? favoriteVideosQuantity : allVideosQuantity;
 };
 
-export const generatePageNumbers = (videos, favorite) => {
-    const videoPerPage = setVideosQuantityPerPage();
+export const generatePageNumbers = (videos, favorite, currentPage, videosQuantityPerPage) => {
+    const totalPagesToDisplay = 3;
+    const videoPerPage = videosQuantityPerPage;
     const videosLength = generateVideoQuantity(videos, favorite);
+    const totalPages = Math.ceil(videosLength / videoPerPage);
+    const maxPaginationItems = Math.min(totalPages, totalPagesToDisplay);
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(videosLength / videoPerPage); i += 1) {
-        pageNumbers.push(i);
+    if (currentPage === 1) {
+        for (let i = currentPage; i <= maxPaginationItems + currentPage - 1; i += 1) {
+            pageNumbers.push(i);
+        }
+    } else if (currentPage < totalPages) {
+        for (let i = currentPage - 1; i < maxPaginationItems + currentPage - 1; i += 1) {
+            pageNumbers.push(i);
+        }
+    } else {
+        for (let i = currentPage; i > currentPage - maxPaginationItems; i -= 1) {
+            pageNumbers.unshift(i);
+        }
     }
-
     return pageNumbers;
 };
 
@@ -238,4 +254,13 @@ export const clearInputValue = (className) => {
 
 export const convertDate = (date) => new Date(date).toISOString().slice(0, 10);
 
-export const setClassNameModifier = (listView) => (listView ? 'list' : 'tiles');
+export const setClassNameModifier = (listView) => {
+    const tilesModifier = 'tiles';
+    const listModifier = 'list';
+
+    return listView ? listModifier : tilesModifier;
+};
+
+export const stopRedirect = (e) => {
+    e.preventDefault();
+};

@@ -14,14 +14,22 @@ import {
 import './videoItem.css';
 
 const VideoItem = ({ videoData }) => {
-    const { id, title, likeCount, viewCount, videoThumb, dateAdded, player } = videoData;
+    const [favorite, setFavorite] = React.useState(false);
 
-    const { setContent, showModal, dispatch, listView, showFavorite } =
-        React.useContext(VideoContext);
+    const { id, title, likeCount, viewCount, videoThumb, dateAdded, player } = videoData;
+    const { setContent, showModal, dispatch, listView } = React.useContext(VideoContext);
 
     const removeVideo = () => {
         setContent(<Confirmation id={id} />);
         showModal();
+    };
+
+    const highlightFavoriteVideo = (e) => {
+        const itemClassList = e.target.classList;
+
+        return itemClassList.contains('button__icon--favorites')
+            ? itemClassList.remove('button__icon--favorites')
+            : itemClassList.add('button__icon--favorites');
     };
 
     const toggleFavoriteState = (value) => {
@@ -29,6 +37,12 @@ const VideoItem = ({ videoData }) => {
             type: VIDEO_ACTIONS.TOGGLE_FAVORITE,
             payload: { id, isFavorite: value },
         });
+    };
+
+    const handleSetFavoritesVideo = (e, value) => {
+        setFavorite(true);
+        toggleFavoriteState(!value);
+        highlightFavoriteVideo(e);
     };
 
     const watchVideo = () => {
@@ -42,7 +56,9 @@ const VideoItem = ({ videoData }) => {
             className={`main__video--${setClassNameModifier(listView)}
             shadow p-3 mb-5 bg-white rounded`}
         >
-            <h3 className={`video__title--${setClassNameModifier(listView)}`}>{title}</h3>
+            <h3 className={`video__title--${setClassNameModifier(listView)}`} title={title}>
+                {title}
+            </h3>
             <ul className={`video__list--${setClassNameModifier(listView)}`}>
                 <li className={`list__item list__item--${setClassNameModifier(listView)}`}>
                     <img
@@ -60,20 +76,29 @@ const VideoItem = ({ videoData }) => {
             <Button
                 className={`video__button--${setClassNameModifier(listView)}`}
                 onClick={watchVideo}
+                title="Watch it"
             >
-                Watch it
+                <i className={`fa-solid fa-play button__icon--${setClassNameModifier(listView)}`} />
             </Button>
             <Button
                 className={`video__button--${setClassNameModifier(listView)}`}
                 onClick={removeVideo}
+                title="Remove"
             >
-                Delete
+                <i
+                    className={`fa-solid fa-trash-can button__icon--${setClassNameModifier(
+                        listView,
+                    )}`}
+                />
             </Button>
             <Button
                 className={`video__button--${setClassNameModifier(listView)}`}
-                onClick={() => toggleFavoriteState(!showFavorite)}
+                onClick={(e) => handleSetFavoritesVideo(e, favorite)}
+                title="Add to favorites"
             >
-                {showFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                <i
+                    className={`fa-solid fa-heart button__icon--${setClassNameModifier(listView)}`}
+                />
             </Button>
         </div>
     );
